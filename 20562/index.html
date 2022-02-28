@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/Linkeer365ColorfulLife2/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Linkeer365ColorfulLife2/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Linkeer365ColorfulLife2/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Linkeer365ColorfulLife2/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Linkeer365ColorfulLife2/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/Linkeer365ColorfulLife2/","images":"/Linkeer365ColorfulLife2/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/Linkeer365ColorfulLife2/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta property="og:type" content="article">
+<meta property="og:title" content="压电振子的模态仿真">
+<meta property="og:url" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/index.html">
+<meta property="og:site_name" content="四季映姬的小天地">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011942_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011948_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011954_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012005_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012011_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012017_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163522_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163528_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163536_com.android.chrome.jpg">
+<meta property="og:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200510_222954_com.android.chrome.jpg">
+<meta property="article:published_time" content="2020-05-08T17:19:42.000Z">
+<meta property="article:modified_time" content="2022-02-27T09:20:34.444Z">
+<meta property="article:author" content="Linkeer365">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011942_com.android.chrome.jpg">
+
+
+<link rel="canonical" href="http://yoursite.com/Linkeer365ColorfulLife2/20562/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>压电振子的模态仿真 | 四季映姬的小天地</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Linkeer365ColorfulLife2/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">四季映姬的小天地</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Linkeer365 生活博客2</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Linkeer365</p>
+  <div class="site-description" itemprop="description">華鳥風月、穏やかで懐かしきもの</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/Linkeer365ColorfulLife2/archives">
+          <span class="site-state-item-count">200</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://linkeer365.github.io/" title="https:&#x2F;&#x2F;linkeer365.github.io&#x2F;" rel="noopener" target="_blank">Linkeer365</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linkeer365.github.io/Linkeer365ColorfulLife" title="http:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365ColorfulLife" rel="noopener" target="_blank">Linkeer365ColorfulLife</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linkeer365.github.io/Linkeer365ColorfulLife2" title="http:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365ColorfulLife2" rel="noopener" target="_blank">Linkeer365ColorfulLife2</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://linkeer365.github.io/Linkeer365ColorfulLife3" title="http:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365ColorfulLife3" rel="noopener" target="_blank">Linkeer365ColorfulLife3</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://linkeer365.github.io/Linkeer365TinyMoment" title="https:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365TinyMoment" rel="noopener" target="_blank">Linkeer365TinyMoment</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://linkeer365.github.io/Linkeer365TinyMoment2" title="https:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365TinyMoment2" rel="noopener" target="_blank">Linkeer365TinyMoment2</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://linkeer365.github.io/Linkeer365BookReview" title="https:&#x2F;&#x2F;linkeer365.github.io&#x2F;Linkeer365BookReview" rel="noopener" target="_blank">Linkeer365BookReview</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linkeer365ColorfulLife2/20562/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Linkeer365ColorfulLife2/images/avatar.gif">
+      <meta itemprop="name" content="Linkeer365">
+      <meta itemprop="description" content="華鳥風月、穏やかで懐かしきもの">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="四季映姬的小天地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          压电振子的模态仿真
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-09 01:19:42" itemprop="dateCreated datePublished" datetime="2020-05-09T01:19:42+08:00">2020-05-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-02-27 17:20:34" itemprop="dateModified" datetime="2022-02-27T17:20:34+08:00">2022-02-27</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011942_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011948_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_011954_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012005_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012011_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200509_012017_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163522_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163528_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200510_163536_com.android.chrome.jpg" class="">
+<img src="/Linkeer365ColorfulLife2/20562/Screenshot_20200510_222954_com.android.chrome.jpg" class="">
+
+<p>原帖：</p>
+<p><code>https://web.archive.org/web/20210308135037/https://www.lgulife.com/bbs/post/1250</code></p>
+<p>Body:</p>
+<p>Threads:<br>社会认知大方向上还是趋同于成功崇拜与强者逻辑，但是成功与强者的定义还是单纯的与权钱紧密挂钩，<br>（或者与两者的衍生符号挂钩，钱方面比如奢侈品，权方面比如辱骂下属与逐级推锅，权钱结合方面比如贵族的猎狐传统，）这就显得单调，并且迫使所有的鲤鱼都得跳龙门，<br>（或者说，迫使所有的人都得像梳笼日的新妓一样，得按照别人要求的姿势去笨拙地做，确实有人成功并乐在其中，但给很多人也带来了苦难与折磨）</p>
+<p>我觉得这样的社会认知是在情理之中的，不喜欢也暂时没法改变，但是我突然在想一件事，就是人们会不会把这样的社会风气视作一种宝贵的不可多得的经验，传授给各自的子女，然后部分子女接受了这种思想并再做继承，一代代地向下传递，如果社会保持相对稳定（只要不乱到能影响绝大多数人固有印象的程度）那么这种思潮就将大量存在并固化，成为一种颇有销路的江湖哲学</p>
+<p>我知道父母肯定不会出于恶意教育孩子一些负面的知识，只是希望防人之心不可无，这是比较正常的，我怕就怕在，如果社会环境变化到只有终日汲汲营营才被认为上进，只有命中了符合（高级享受）样板规定的活法样式才算上流，那么我们的孩子，是不是早在儿时便要接受这种思想的指导，便要意识到只有这几种模式才是精彩人生该有的样子？</p>
+<p>上进到底是不是必选项，还是看似可选实际上不得不选的可选项？<br>富贵与威权，是不是一种亘古及今百试百灵的春药？<br>（如果是的话，那我很想问他们到底想达到怎样一个持久的时长？纵情声色的一辈子看上去是一种荣光，但频繁发情在我看来有些病态）</p>
+<p>我仿佛看到了我的孩子远远地对我说，你到底是因为一时糊涂与放纵把我带到世界上来，造成现在必须相互厮杀并洒扫战场这样的局面；还是处于死性不改的恶趣味，故意让我来一趟人间发现一切的梦都通往悬崖，一切的卑劣都言之凿凿，一切的理想都变成毒药，一切的汲汲营营都一步步地水涨船高？</p>
+<p>我们终究是再也看不到死火了</p>
+<p>所以我在能保证ta不会受这样的痛苦之前（大概也没有这一天）绝对不生孩子</p>
+<p>唉我其实也不是这个意思啦，这还是要取决于你自己本身的综合考量，不要因为我的一句话然后影响了你hh<br>不过我自己也在想，就是再过30年新一批孩子们长大的时候，中国也将全面地迈入老龄化社会，年轻人的压力会更大，比如说像现在的日本，到时候我们大概会比他严重3-5倍左右<br>（所以你如果要长期投资的话投医药保健类就可以了，中国下一个20-30年就会碰到这样的严峻挑战）<br>我这边发一本《无缘社会》好了，本来在这里有，但是现在过期了</p>
+<p>密码：kksk</p>
+<p>没事，这本来就是我挺早以前就考虑过的决定，不用担心是受你影响。</p>
+<p>那就好，希望你过得开心点，相信历史与魔法</p>
+<p>Link: <code>http://web.archive.org/web/20210308141615/https://www.lgulife.com/bbs/post/1191/</code></p>
+<p>[死火-鲁迅]<br>(<code>http://web.archive.org/web/20210429145714/http://www.saohua.com/shuku/luxun/poem/005.htm</code>)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Linkeer365ColorfulLife2/15982/" rel="prev" title="虚妄取异象">
+                  <i class="fa fa-chevron-left"></i> 虚妄取异象
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Linkeer365ColorfulLife2/47552/" rel="next" title="孙小果">
+                  孙小果 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Linkeer365</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">3.7m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">56:12</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/Linkeer365ColorfulLife2/js/utils.js"></script><script src="/Linkeer365ColorfulLife2/js/motion.js"></script><script src="/Linkeer365ColorfulLife2/js/next-boot.js"></script>
+
+  
+
+<script src="/Linkeer365ColorfulLife2/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
